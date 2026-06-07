@@ -1,0 +1,73 @@
+{
+  "name": "farmlogic",
+  "version": "1.3.0",
+  "description": "FarmLogic - Namibian Farm Management Suite",
+  "author": {
+    "name": "Janwillem van Zyl",
+    "email": "dex4548@github.com"
+  },
+  "main": "electron/main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "package-win": "npm run build && electron-builder --win",
+    "package-mac": "npm run build && electron-builder --mac",
+    "release": "npm run build && electron-builder --win --mac --publish always"
+  },
+  "dependencies": {
+    "electron-updater": "^6.1.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.farmlogic.app",
+    "productName": "FarmLogic",
+    "copyright": "Copyright 2025 Janwillem van Zyl. All Rights Reserved.",
+    "publish": {
+      "provider": "github",
+      "owner": "dex4548",
+      "repo": "farmlogic",
+      "releaseType": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "public/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.business"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "FarmLogic"
+    },
+    "files": [
+      "build/**/*",
+      "electron/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    }
+  },
+  "eslintConfig": {
+    "extends": ["react-app"]
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version"]
+  }
+}
