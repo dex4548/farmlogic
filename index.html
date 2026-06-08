@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>FarmLogic — Namibian Farm Management Software</title>
+<meta name="description" content="FarmLogic is the most advanced farm management software built specifically for Namibian farmers. Track livestock, manage workers, handle payroll, bookkeeping and more."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0c0e;--surface:#111416;--card:#161a1d;
+  --amber:#d48c2a;--amber-l:#f0a832;
+  --text:#e8eaec;--text2:#7a8591;--text3:#4a5560;
+  --green:#2dbd6e;--red:#e05252;--blue:#4a9eff;
+  --border:#242a2e;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:70px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,12,14,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--amber-l)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.5px;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--amber);color:#000;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;transition:background .2s}
+.nav-cta:hover{background:var(--amber-l);color:#000!important}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 20px 60px;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(212,140,42,0.12) 0%,transparent 70%)}
+.hero-tag{display:inline-block;background:rgba(212,140,42,0.15);border:1px solid rgba(212,140,42,0.3);color:var(--amber-l);padding:6px 18px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,100px);letter-spacing:2px;line-height:1;margin-bottom:24px;background:linear-gradient(135deg,var(--text) 0%,var(--amber-l) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(16px,2vw,20px);color:var(--text2);max-width:600px;margin:0 auto 40px;line-height:1.6}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+.btn-primary{background:var(--amber);color:#000;padding:16px 36px;border-radius:10px;text-decoration:none;font-weight:800;font-size:14px;letter-spacing:1px;text-transform:uppercase;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--amber-l);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--text);padding:16px 36px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--border);transition:all .2s}
+.btn-outline:hover{border-color:var(--amber);color:var(--amber-l)}
+.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--amber-l);line-height:1}
+.hero-stat-label{font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+
+/* MOCKUP */
+.mockup-section{padding:60px 40px;max-width:1100px;margin:0 auto}
+.mockup-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,0.6)}
+.mockup-bar{background:var(--surface);padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.dot{width:12px;height:12px;border-radius:50%}
+.mockup-inner{padding:24px;display:grid;grid-template-columns:180px 1fr;gap:0;min-height:400px}
+.mockup-sidebar{background:var(--surface);border-right:1px solid var(--border);padding:16px;display:flex;flex-direction:column;gap:4px}
+.mockup-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--amber-l);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.mockup-item{padding:8px 10px;border-radius:6px;font-size:11px;font-weight:600;color:var(--text3);display:flex;align-items:center;gap:8px}
+.mockup-item.active{background:rgba(212,140,42,0.15);color:var(--amber-l)}
+.mockup-content{padding:20px}
+.mockup-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.mockup-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;position:relative;overflow:hidden}
+.mockup-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--amber);opacity:.6}
+.mockup-card-val{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--text)}
+.mockup-card-lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.mockup-table{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.mockup-thead{background:rgba(255,255,255,0.03);padding:8px 12px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.mockup-th{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text3)}
+.mockup-row{padding:8px 12px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;border-top:1px solid var(--border)}
+.mockup-td{font-size:11px;color:var(--text2)}
+.tag{font-size:9px;padding:2px 7px;border-radius:10px;font-weight:700}
+.tag-g{background:rgba(45,189,110,.15);color:var(--green)}
+.tag-a{background:rgba(212,140,42,.15);color:var(--amber-l)}
+
+/* SECTIONS */
+section{padding:100px 40px}
+.section-tag{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber-l);margin-bottom:16px}
+h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);letter-spacing:2px;line-height:1.1;margin-bottom:20px}
+.section-sub{font-size:16px;color:var(--text2);max-width:560px;line-height:1.7;margin-bottom:60px}
+.container{max-width:1100px;margin:0 auto}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.feature-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;transition:border-color .2s,transform .2s}
+.feature-card:hover{border-color:rgba(212,140,42,0.3);transform:translateY(-4px)}
+.feature-icon{font-size:36px;margin-bottom:16px}
+.feature-title{font-size:17px;font-weight:800;margin-bottom:10px}
+.feature-desc{font-size:13px;color:var(--text2);line-height:1.7}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto}
+@media(max-width:700px){.pricing-grid{grid-template-columns:1fr}}
+.pricing-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center;position:relative;transition:transform .2s}
+.pricing-card.featured{border-color:var(--amber);background:linear-gradient(135deg,rgba(212,140,42,0.08),var(--card))}
+.pricing-card.featured::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--amber);color:#000;font-size:10px;font-weight:800;letter-spacing:2px;padding:4px 16px;border-radius:20px}
+.pricing-card:hover{transform:translateY(-4px)}
+.price-name{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.price-amount{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--amber-l);line-height:1}
+.price-period{font-size:13px;color:var(--text3);margin-bottom:24px}
+.price-features{list-style:none;margin-bottom:28px;text-align:left}
+.price-features li{font-size:13px;color:var(--text2);padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.price-features li::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0}
+.btn-price{display:block;padding:14px;border-radius:8px;font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .2s;text-align:center}
+.btn-price-primary{background:var(--amber);color:#000}.btn-price-primary:hover{background:var(--amber-l)}
+.btn-price-outline{background:transparent;color:var(--text);border:1px solid var(--border)}.btn-price-outline:hover{border-color:var(--amber);color:var(--amber-l)}
+
+/* TESTIMONIALS */
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.testimonial-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px}
+.testimonial-text{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:12px}
+.testimonial-avatar{width:44px;height:44px;border-radius:50%;background:var(--amber-glow,rgba(212,140,42,0.15));border:1px solid var(--amber);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--amber-l);font-size:16px;flex-shrink:0}
+.testimonial-name{font-weight:700;font-size:14px}
+.testimonial-role{font-size:12px;color:var(--text3)}
+
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.step{text-align:center;padding:28px 20px}
+.step-num{font-family:'Bebas Neue',sans-serif;font-size:64px;color:rgba(212,140,42,0.2);line-height:1;margin-bottom:12px}
+.step-title{font-size:16px;font-weight:800;margin-bottom:10px}
+.step-desc{font-size:13px;color:var(--text2);line-height:1.7}
+
+/* CTA */
+.cta-section{text-align:center;padding:120px 40px;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(212,140,42,0.1) 0%,transparent 70%)}
+
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:60px 40px 40px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1100px;margin:0 auto 40px}
+@media(max-width:700px){.footer-grid{grid-template-columns:1fr}}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--amber-l);margin-bottom:12px}
+.footer-desc{font-size:13px;color:var(--text3);line-height:1.7;max-width:260px}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text2);margin-bottom:16px}
+.footer-links{display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--amber-l)}
+.footer-bottom{max-width:1100px;margin:0 auto;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-bottom-text{font-size:12px;color:var(--text3)}
+
+/* NAMIBIA BADGE */
+.nam-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(45,189,110,0.1);border:1px solid rgba(45,189,110,0.2);color:var(--green);padding:8px 16px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:24px}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  section{padding:60px 20px}
+  .mockup-inner{grid-template-columns:1fr}
+  .mockup-sidebar{display:none}
+  .mockup-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  h1{font-size:48px}
+}
+
+/* SCROLL ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* DARK STRIPE */
+.dark-stripe{background:var(--surface)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">FarmLogic</div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How it Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#download">Download</a>
+    <a href="https://github.com/dex4548/farmlogic/releases/latest" class="nav-cta">⬇ Download Free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="nam-badge">🇳🇦 Built for Namibian Farmers</div>
+    <div class="hero-tag">Farm Management Software</div>
+    <h1>Run Your Farm<br/>Like a Business</h1>
+    <p class="hero-sub">FarmLogic is the most complete farm management software built specifically for Namibian conditions. Track livestock, manage workers, handle payroll, bookkeeping and more — all in one app.</p>
+    <div class="hero-btns">
+      <a href="https://github.com/dex4548/farmlogic/releases/latest" class="btn-primary">⬇ Download for Free</a>
+      <a href="#features" class="btn-outline">See All Features →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">20+</div><div class="hero-stat-label">Modules</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-label">Namibia-Specific</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">Free</div><div class="hero-stat-label">To Start</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">Win + Mac</div><div class="hero-stat-label">Platforms</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- APP MOCKUP -->
+<div class="mockup-section">
+  <div class="mockup-wrap fade-in">
+    <div class="mockup-bar">
+      <div class="dot" style="background:#ff5f57"></div>
+      <div class="dot" style="background:#ffbd2e"></div>
+      <div class="dot" style="background:#28c840"></div>
+      <div style="margin-left:12px;font-size:11px;color:#555">FarmLogic v1.4</div>
+    </div>
+    <div class="mockup-inner">
+      <div class="mockup-sidebar">
+        <div class="mockup-logo">FarmLogic</div>
+        <div class="mockup-item active">⊞ Dashboard</div>
+        <div class="mockup-item">🐄 Livestock</div>
+        <div class="mockup-item">👷 Workers</div>
+        <div class="mockup-item">📋 Leave</div>
+        <div class="mockup-item">📊 Bookkeeping</div>
+        <div class="mockup-item">🧾 Tax & Payroll</div>
+        <div class="mockup-item">🌾 Feed Calculator</div>
+        <div class="mockup-item">📅 Calendar</div>
+        <div class="mockup-item">🤖 AI Assistant</div>
+      </div>
+      <div class="mockup-content">
+        <div class="mockup-grid">
+          <div class="mockup-card"><div class="mockup-card-lbl">Total Animals</div><div class="mockup-card-val">247</div></div>
+          <div class="mockup-card"><div class="mockup-card-lbl">Workers</div><div class="mockup-card-val">14</div></div>
+          <div class="mockup-card"><div class="mockup-card-lbl">Net Profit YTD</div><div class="mockup-card-val" style="font-size:20px;color:#2dbd6e">N$186k</div></div>
+          <div class="mockup-card"><div class="mockup-card-lbl">Payroll</div><div class="mockup-card-val" style="font-size:20px">N$68k</div></div>
+        </div>
+        <div class="mockup-table">
+          <div class="mockup-thead">
+            <div class="mockup-th">Animal</div><div class="mockup-th">Category</div><div class="mockup-th">Farm</div><div class="mockup-th">Status</div>
+          </div>
+          <div class="mockup-row"><div class="mockup-td" style="color:#f0a832;font-family:monospace">C-001</div><div class="mockup-td">Cow</div><div class="mockup-td">Farm 1</div><div class="mockup-td"><span class="tag tag-g">Active</span></div></div>
+          <div class="mockup-row"><div class="mockup-td" style="color:#f0a832;font-family:monospace">C-002</div><div class="mockup-td">Bull</div><div class="mockup-td">Farm 1</div><div class="mockup-td"><span class="tag tag-g">Active</span></div></div>
+          <div class="mockup-row"><div class="mockup-td" style="color:#f0a832;font-family:monospace">S-001</div><div class="mockup-td">Ewe</div><div class="mockup-td">Farm 3</div><div class="mockup-td"><span class="tag tag-g">Active</span></div></div>
+          <div class="mockup-row"><div class="mockup-td" style="color:#f0a832;font-family:monospace">C-003</div><div class="mockup-td">Heifer</div><div class="mockup-td">Farm 2</div><div class="mockup-td"><span class="tag tag-a">Sold</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="section-tag">Everything You Need</div>
+    <h2>Built for Namibian<br/>Farm Reality</h2>
+    <p class="section-sub">No generic farm software from Europe or America. FarmLogic understands Namlits, Meatco, Agra, NamRA tax tables and Namibian farming conditions.</p>
+    <div class="features-grid fade-in">
+      <div class="feature-card"><div class="feature-icon">🐄</div><div class="feature-title">Livestock Management</div><div class="feature-desc">Track cattle, sheep, goats, pigs and horses with full subcategories — Cows, Heifers, Tollies, Bulls, Oxen, Ewes, Rams, Lambs and more. Record births, deaths, sales and calf counts per cow.</div></div>
+      <div class="feature-card"><div class="feature-icon">📥</div><div class="feature-title">Namlits Import</div><div class="feature-desc">Upload your Namlits herd statement CSV directly. FarmLogic reads every animal record and updates your herd automatically. No manual data entry needed.</div></div>
+      <div class="feature-card"><div class="feature-icon">🧾</div><div class="feature-title">NamRA-Compliant Payroll</div><div class="feature-desc">Calculates PAYE using official NamRA 2024/25 tax brackets. SSC at 0.9% employee and 1.8% employer. Toggle PAYE and SSC per worker. Print payslips instantly.</div></div>
+      <div class="feature-card"><div class="feature-icon">📊</div><div class="feature-title">Bookkeeping & ROI</div><div class="feature-desc">Track income and expenses per farm. Upload invoices and receipts — AI reads them and categorises automatically. See your ROI per animal and per farm.</div></div>
+      <div class="feature-card"><div class="feature-icon">🌾</div><div class="feature-title">Feed Calculator</div><div class="feature-desc">Calculate exact feed quantities based on the correct 80/20 supplement to roughage ratio. Supports Enerfeed, Chop, Feedmaster, Molatek. Cost per animal per day.</div></div>
+      <div class="feature-card"><div class="feature-icon">🥩</div><div class="feature-title">Slaughter Records</div><div class="feature-desc">Record Meatco slaughter grades A1, A2, A3, B, C. Auto-calculates dressing percentage and value. All Meatco abattoir locations supported.</div></div>
+      <div class="feature-card"><div class="feature-icon">💉</div><div class="feature-title">Vet & Health</div><div class="feature-desc">Track vaccinations, treatments, deworming and check-ups per animal. Get alerts when animals are overdue. Never miss an FMD vaccination again.</div></div>
+      <div class="feature-card"><div class="feature-icon">🌿</div><div class="feature-title">Grazing Management</div><div class="feature-desc">Track camps and paddocks with rotation status — In Use, Resting, Available. Monitor water points. Know exactly when each camp was last grazed.</div></div>
+      <div class="feature-card"><div class="feature-icon">🚜</div><div class="feature-title">Farm Implements & Job Cards</div><div class="feature-desc">Track every tractor, bulldozer, padskraper and implement. Open job cards for repairs with auto-suggested part numbers for Ford, John Deere and Massey Ferguson.</div></div>
+      <div class="feature-card"><div class="feature-icon">🪪</div><div class="feature-title">Vehicle Licence Tracker</div><div class="feature-desc">Track licence disc, roadworthy and insurance expiry dates for all vehicles. Get 60-day warnings per Namibian Road Traffic Act No. 22 of 1999.</div></div>
+      <div class="feature-card"><div class="feature-icon">📅</div><div class="feature-title">Farm Calendar</div><div class="feature-desc">Schedule dipping, breeding, auctions, vet visits, maintenance and more. Set alerts 1 day to 2 months in advance. Vet and licence dates auto-appear from your records.</div></div>
+      <div class="feature-card"><div class="feature-icon">🤖</div><div class="feature-title">AI Assistant</div><div class="feature-desc">Ask your farm anything in plain English. "What is my net profit?", "Which animals need vaccination?", "How is Farm 3 performing?" Get instant answers from your real data.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="dark-stripe">
+  <div class="container">
+    <div class="section-tag">Simple Setup</div>
+    <h2>Up and Running<br/>in Minutes</h2>
+    <p class="section-sub">No IT knowledge needed. No subscription required to start. Download, install and you're farming smarter today.</p>
+    <div class="steps fade-in">
+      <div class="step"><div class="step-num">01</div><div class="step-title">Download</div><div class="step-desc">Click download and run the installer. Works on Windows and Mac. No internet required after install.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">Set Up Your Farm</div><div class="step-desc">Add your farms, import your Namlits herd statement, add your workers. Takes less than 30 minutes.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">Start Managing</div><div class="step-desc">Track livestock, run payroll, manage bookkeeping and let the AI assistant answer your questions.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">Auto Updates</div><div class="step-desc">FarmLogic updates itself automatically. Every new feature arrives on your PC without you doing anything.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container" style="text-align:center">
+    <div class="section-tag">Simple Pricing</div>
+    <h2>Choose Your Plan</h2>
+    <p class="section-sub" style="margin:0 auto 60px">Start free. Upgrade when you're ready. Cancel anytime. All plans include automatic updates.</p>
+    <div class="pricing-grid fade-in">
+      <div class="pricing-card">
+        <div class="price-name">Starter</div>
+        <div class="price-amount">N$199</div>
+        <div class="price-period">per month</div>
+        <ul class="price-features">
+          <li>1 farm</li>
+          <li>Up to 500 animals</li>
+          <li>All livestock modules</li>
+          <li>Worker & payroll</li>
+          <li>Bookkeeping</li>
+          <li>Namlits import</li>
+          <li>Auto updates</li>
+        </ul>
+        <a href="https://github.com/dex4548/farmlogic/releases/latest" class="btn-price btn-price-outline">Download & Try Free</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="price-name">Professional</div>
+        <div class="price-amount">N$449</div>
+        <div class="price-period">per month</div>
+        <ul class="price-features">
+          <li>Up to 5 farms</li>
+          <li>Unlimited animals</li>
+          <li>Everything in Starter</li>
+          <li>AI Assistant</li>
+          <li>ROI Dashboard</li>
+          <li>Auction scanner</li>
+          <li>Farm calendar</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="https://github.com/dex4548/farmlogic/releases/latest" class="btn-price btn-price-primary">Download & Try Free</a>
+      </div>
+      <div class="pricing-card">
+        <div class="price-name">Enterprise</div>
+        <div class="price-amount">N$899</div>
+        <div class="price-period">per month</div>
+        <ul class="price-features">
+          <li>Unlimited farms</li>
+          <li>Unlimited animals</li>
+          <li>Everything in Professional</li>
+          <li>Multi-user access</li>
+          <li>Admin dashboard</li>
+          <li>Custom reporting</li>
+          <li>Dedicated support</li>
+        </ul>
+        <a href="https://github.com/dex4548/farmlogic/releases/latest" class="btn-price btn-price-outline">Download & Try Free</a>
+      </div>
+    </div>
+    <p style="margin-top:32px;font-size:13px;color:var(--text3)">All plans start with a 14-day free trial. No credit card required.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="dark-stripe">
+  <div class="container">
+    <div class="section-tag">What Farmers Say</div>
+    <h2>Built by a Farmer,<br/>for Farmers</h2>
+    <p class="section-sub">FarmLogic was built on 13 real farms in Namibia. Every feature solves a real problem.</p>
+    <div class="testimonials-grid fade-in">
+      <div class="testimonial-card">
+        <div class="testimonial-text">"Finally a program that understands Namlits. I uploaded my herd statement and everything imported in seconds. My whole herd was in the system before my morning coffee."</div>
+        <div class="testimonial-author"><div class="testimonial-avatar">P</div><div><div class="testimonial-name">Pieter V.</div><div class="testimonial-role">Commercial Cattle Farmer, Otjozondjupa</div></div></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">"The payroll module saves me N$1,500 a month I was paying a bookkeeper. The NamRA tax tables are correct and my workers get proper payslips every month."</div>
+        <div class="testimonial-author"><div class="testimonial-avatar">A</div><div><div class="testimonial-name">Anna M.</div><div class="testimonial-role">Mixed Farm, Hardap Region</div></div></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">"The AI assistant is incredible. I just type 'how is Farm 3 doing this month' and it gives me a full breakdown. It's like having a farm manager in my pocket."</div>
+        <div class="testimonial-author"><div class="testimonial-avatar">J</div><div><div class="testimonial-name">Jan K.</div><div class="testimonial-role">Sheep & Goat Farmer, Karas Region</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD CTA -->
+<section id="download" class="cta-section">
+  <div class="section-tag">Get Started Today</div>
+  <h2>Download FarmLogic<br/>for Free</h2>
+  <p style="font-size:16px;color:var(--text2);max-width:500px;margin:0 auto 40px;line-height:1.7">Available for Windows and Mac. Installs in under 2 minutes. No internet required to use. Your data stays on your computer.</p>
+  <div class="hero-btns">
+    <a href="https://github.com/dex4548/farmlogic/releases/latest" class="btn-primary">⬇ Download for Windows</a>
+    <a href="https://github.com/dex4548/farmlogic/releases/latest" class="btn-outline">⬇ Download for Mac</a>
+  </div>
+  <p style="font-size:12px;color:var(--text3);margin-top:20px">Version 1.4.0 • Windows 10/11 • macOS 11+ • Free to download</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">FarmLogic</div>
+      <p class="footer-desc">The most complete farm management software built specifically for Namibian farmers. Built on real farms, for real farmers.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Product</div>
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#download">Download</a>
+        <a href="https://github.com/dex4548/farmlogic/releases">Release Notes</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <div class="footer-links">
+        <a href="https://github.com/dex4548/farmlogic">GitHub</a>
+        <a href="https://github.com/dex4548/farmlogic/issues">Report a Bug</a>
+        <a href="#how">How it Works</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Legal</div>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">License</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-text">© 2025 Janwillem van Zyl. All Rights Reserved. FarmLogic is a registered trademark.</div>
+    <div class="footer-bottom-text">🇳🇦 Made in Namibia</div>
+  </div>
+</footer>
+
+<script>
+// Scroll animations
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// Nav scroll effect
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.background=
+    window.scrollY>50?'rgba(10,12,14,0.98)':'rgba(10,12,14,0.95)';
+});
+</script>
+</body>
+</html>
